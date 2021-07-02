@@ -21,6 +21,8 @@ const Transfer = ({ user, rest }) => {
 			options
 		);
 		const json = res.json();
+		setReceiverID('');
+		setValue(0);
 		console.log(json);
 	}
 
