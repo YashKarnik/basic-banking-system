@@ -1,0 +1,55 @@
+@import './_variables.scss';
+.container {
+	width: 90%;
+	height: 90%;
+	margin: 2rem auto;
+	padding-bottom: 2rem;
+	text-align: center;
+	background-color: $background-color-tertiary;
+	.name {
+		font-size: 4rem;
+	}
+	.email {
+		font-size: 2rem;
+	}
+	.curr_balance {
+		font-size: 2rem;
+	}
+}
+
+.transactions {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.3rem;
+}
+.transaction {
+	cursor: default;
+	width: 90%;
+	margin: auto;
+	padding: 1rem 2rem;
+	border-radius: 0.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-direction: row;
+	background-color: $background-color-secondary;
+
+	font-size: 1.3rem;
+}
+.receiver {
+	color: green;
+}
+.sender {
+	color: red;
+}
+
+.payMoney {
+	border: none;
+	outline: none;
+	font-size: 1.5rem;
+	font-weight: 400;
+	padding: 1rem;
+	background-color: blueviolet;
+	border-radius: 10000rem;
+}

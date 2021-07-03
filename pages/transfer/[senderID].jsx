@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import styles from '../../styles/transfer.module.scss';
 
 const Transfer = ({ user, rest }) => {
 	const [receiverID, setReceiverID] = useState('');
-	const [value, setValue] = useState(0);
+	const [value, setValue] = useState('');
+	const [currID, setCurrID] = useState(rest[0].user_id);
+
 	async function handleSumbit(evt) {
 		evt.preventDefault();
+		if (currID == '') {
+			alert('Please select a user');
+			return;
+		}
+		if (value == 0) {
+			alert('Enter valid number');
+			return;
+		}
 		const options = {
 			headers: {
 				Accept: 'application/json',
@@ -12,7 +23,7 @@ const Transfer = ({ user, rest }) => {
 			},
 			method: 'POST',
 			body: JSON.stringify({
-				receiverID,
+				receiverID: currID,
 				value,
 			}),
 		};
@@ -22,36 +33,49 @@ const Transfer = ({ user, rest }) => {
 		);
 		const json = res.json();
 		setReceiverID('');
-		setValue(0);
+		setValue('');
 		console.log(json);
 	}
-
+	useEffect(() => {
+		console.log(currID);
+	}, [currID]);
 	return (
-		<div>
-			<h1>USER</h1>
-			{JSON.stringify(user)}
-			<h1>REST</h1>
-			{JSON.stringify(rest)}
-			<h1>FORM</h1>
-			<form onSubmit={handleSumbit}>
-				<h3>
-					SENDER:{user.first_name} {user.last_name}
-				</h3>
-				<h3>
-					receiver:
-					<input
-						type='text'
-						placeholder='Enter receiver'
-						onChange={e => setReceiverID(e.target.value)}
-					/>
-					<input
-						type='number'
-						min='50'
-						placeholder='Enter value'
-						onChange={e => setValue(parseInt(e.target.value))}
-					/>
-				</h3>
-				<button type='submit'>PAY</button>
+		<div className={styles.container}>
+			<div className={styles.user}>
+				<div className={styles.name}>
+					{user.first_name}&nbsp;{user.last_name}
+				</div>
+				<div className={styles.email}>{user.email}</div>
+				<div className={styles.curr_balance}>
+					Balance: {user.curr_balance}/-
+				</div>
+			</div>
+			<div className={styles.users_list}>
+				{rest?.map(user => (
+					<div
+						key={user.user_id}
+						className={`${styles.user} ${
+							user.user_id === currID ? styles.selected : styles.notselected
+						}`}
+						onClick={() => setCurrID(user.user_id)}>
+						<p className={styles.name}>
+							{user?.first_name}&nbsp;
+							{user?.last_name}
+						</p>
+					</div>
+				))}
+			</div>
+			<form className={styles.payform} onSubmit={handleSumbit}>
+				<input
+					type='number'
+					onChange={e => setValue(e.target.value)}
+					placeholder='Enter money to transfer'
+					value={value}
+					min='10'
+				/>
+				<button className={styles.payMoney} type='submit'>
+					TRANSFER MONEY
+				</button>
 			</form>
 		</div>
 	);

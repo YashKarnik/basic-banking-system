@@ -1,0 +1,11 @@
+@import './_variables.scss';
+.container {
+	background-color: $background-color-secondary;
+	ul {
+		padding: 1rem;
+		font-size: $font-size;
+		display: flex;
+		flex-direction: row;
+		list-style: none;
+	}
+}

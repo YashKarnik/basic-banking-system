@@ -1,0 +1,42 @@
+@import './_variables.scss';
+.container {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	place-items: center;
+	font-size: 3em;
+}
+
+.content {
+	text-align: center;
+	// animation-name: pulse;
+	// animation-duration: 1000ms;
+	// animation-timing-function: linear;
+	// animation-delay: none;
+	// animation-iteration-count: 1;
+	// animation-direction: normal;
+	// animation-fill-mode: forwards;
+	// animation-play-state: running;
+	div {
+		cursor: pointer;
+		transition-duration: 100ms;
+		font-size: $font-size-secondary + 1rem;
+
+		&:hover {
+			transform: translate(2rem);
+		}
+
+		// &:active {
+		//
+		// }
+	}
+}
+
+@keyframes pulse {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(150%);
+	}
+}
