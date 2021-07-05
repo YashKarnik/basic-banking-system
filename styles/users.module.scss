@@ -23,16 +23,22 @@
 	gap: 1rem;
 	margin: 1rem;
 	.user {
+		color: $font-color-primary;
 		cursor: pointer;
-		width: 90%;
+		width: 70%;
 		margin: auto;
-		padding: 1rem 2rem;
+		padding: 0.5rem 2rem;
 		border-radius: 0.4rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		flex-direction: row;
-		background-color: blueviolet;
+		background-color: $primary-blue;
+		// background-color: #673ab7;
 		font-size: 2rem;
+		transition-duration: 100ms;
+		&:hover {
+			transform: scale(1.03);
+		}
 	}
 }

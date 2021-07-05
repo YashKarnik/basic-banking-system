@@ -1,0 +1,22 @@
+.container {
+	height: 100vh;
+	width: 100%;
+	display: grid;
+	place-items: center;
+	div {
+		animation: rot 1000ms linear 0s infinite normal forwards;
+		border: 5px solid transparent;
+		border-top: 5px solid #fff;
+		border-radius: 50%;
+		width: 5rem;
+		height: 5rem;
+	}
+}
+@keyframes rot {
+	from {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}

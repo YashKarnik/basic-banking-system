@@ -63,3 +63,11 @@ INSERT INTO users (first_name,last_name,email,curr_balance) VALUES ('Shaun','Nea
 INSERT INTO users (first_name,last_name,email,curr_balance) VALUES ('Jason','Armendariz','jason.armendariz@email.com',10000); 
 INSERT INTO users (first_name,last_name,email,curr_balance) VALUES ('David','Urbaniak','david.urbaniak@email.com',10000);     
 INSERT INTO users (first_name,last_name,email,curr_balance) VALUES ('Leonard','Molineaux','leonard.molineaux@email.com',10000)
+
+
+
+CREATE TABLE OrderDetails(
+   OrderId BINARY(16) DEFAULT UUID_TO_BIN(UUID()),
+   ProductName VARCHAR(100) NOT NULL,
+   Price DECIMAL(10, 2) NOT NULL,
+);

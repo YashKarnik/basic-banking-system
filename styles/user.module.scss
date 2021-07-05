@@ -6,6 +6,7 @@
 	padding-bottom: 2rem;
 	text-align: center;
 	background-color: $background-color-tertiary;
+	// background-color: #222;
 	.name {
 		font-size: 4rem;
 	}
@@ -34,11 +35,10 @@
 	justify-content: space-around;
 	flex-direction: row;
 	background-color: $background-color-secondary;
-
 	font-size: 1.3rem;
 }
 .receiver {
-	color: green;
+	color: rgb(29, 194, 29);
 }
 .sender {
 	color: red;
@@ -47,9 +47,13 @@
 .payMoney {
 	border: none;
 	outline: none;
-	font-size: 1.5rem;
-	font-weight: 400;
-	padding: 1rem;
-	background-color: blueviolet;
+	font-size: 1.3rem;
+	color: $font-color-primary;
+	padding: 1.3rem;
+	background-color: $action-success;
 	border-radius: 10000rem;
+	transition-duration: 100ms;
+	&:hover {
+		transform: scale(1.03);
+	}
 }

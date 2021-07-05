@@ -3,8 +3,9 @@
 	width: 90%;
 	height: 90%;
 	margin: 2rem auto;
-	padding-bottom: 2rem;
+	padding-bottom: 0.7rem;
 	text-align: center;
+	border-radius: 1rem;
 	background-color: $background-color-tertiary;
 	.name {
 		font-size: 4rem;
@@ -35,35 +36,63 @@
 		}
 	}
 }
-
-.selected {
-	background-color: green;
-}
-.notselected {
-	background-color: blueviolet;
-}
 .payform {
 	display: flex;
-	flex-direction: column;
-	width: 25%;
-	margin: auto;
+	flex-direction: row;
+	justify-content: centers;
+	margin: 1rem auto 0 auto;
 	gap: 1rem;
 	input {
+		outline: none;
 		padding: 1rem;
+		text-align: center;
+
+		font-size: 1.3rem;
 		border-radius: 10000rem;
 		&::placeholder {
+			font-size: 1rem;
 			text-align: center;
 		}
 	}
 
 	.payMoney {
+		margin: auto;
 		cursor: pointer;
 		border: none;
 		outline: none;
 		font-size: 1rem;
 		font-weight: 400;
 		padding: 1rem;
-		background-color: blueviolet;
+		color: #fff;
+		background-color: $action-success;
+		transition-duration: 100ms;
 		border-radius: 10000rem;
+		&:hover {
+			transform: scale(1.03);
+		}
+	}
+}
+
+.selected {
+	background-color: #52606d;
+	transform: scale(1.03);
+	animation-name: breath;
+	animation-duration: 100ms;
+	animation-timing-function: linear;
+	animation-delay: none;
+	animation-iteration-count: 1;
+	animation-direction: normal;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+}
+.notselected {
+	background-color: #323f4b;
+}
+@keyframes breath {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.03);
 	}
 }

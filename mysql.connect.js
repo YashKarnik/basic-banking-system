@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: '',
-	database: 'basic-banking-system',
+	host: process.env.AWS_RDS_DB_HOST,
+	user: process.env.AWS_RDS_DB_USER,
+	password: process.env.AWS_RDS_DB_PASSWORD,
+	database: process.env.AWS_RDS_DB_DEFAULT_DATABASE,
 });
 
 connection.connect(err => {
