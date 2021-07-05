@@ -88,6 +88,47 @@
 .notselected {
 	background-color: #323f4b;
 }
+
+.transfer_success,
+.transfer_fail {
+	color: #4bb543;
+	border: 3px solid #4bb543;
+	font-size: 2rem;
+	padding: 1rem;
+	width: 70%;
+	margin: auto;
+	border-radius: 2rem;
+	cursor: default;
+	transition-duration: 100ms;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	position: relative;
+	div {
+		position: absolute;
+		right: 2rem;
+		transition-duration: 100ms;
+		cursor: pointer;
+		&:hover {
+			transform: scale(1.3);
+		}
+	}
+}
+.transfer_success {
+	&:hover {
+		color: #fff;
+		background-color: #4bb543;
+	}
+}
+
+.transfer_fail {
+	border: 3px solid #ff0f0f;
+	color: #ff0f0f;
+	&:hover {
+		color: #fff;
+		background-color: #ff0f0f;
+	}
+}
 @keyframes breath {
 	0% {
 		transform: scale(1);

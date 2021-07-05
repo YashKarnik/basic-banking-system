@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import styles from '../../styles/users.module.scss';
 import Loading from '../../components/loading';
-
+import { baseUri } from '../../next.config';
+// import Head from 'next/head';
 export default function Home({ users }) {
 	const [loading, setLoading] = useState(true);
 	const Router = useRouter();
@@ -27,7 +28,10 @@ export default function Home({ users }) {
 	}, [Router]);
 	return (
 		<div className={styles.container}>
-			<h1 className={styles.heading}>Users</h1>
+			<Head>
+				<title>User accounts</title>
+			</Head>
+			<div className={styles.heading}>Accounts</div>
 			<div className={styles.users_list}>
 				{users?.map((user, idx) => (
 					<a key={idx} href={`users/${user.user_id}`}>
@@ -45,9 +49,8 @@ export default function Home({ users }) {
 }
 export async function getServerSideProps(context) {
 	try {
-		const res = await fetch('http://localhost:3001/api/users');
+		const res = await fetch(`${baseUri}/api/users`);
 		const json = await res.json();
-		console.log(json);
 		if (json?.error) throw json.error;
 		return {
 			props: {

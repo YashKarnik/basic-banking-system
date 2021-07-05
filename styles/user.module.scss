@@ -31,11 +31,16 @@
 	padding: 1rem 2rem;
 	border-radius: 0.4rem;
 	display: flex;
-	align-items: center;
+
 	justify-content: space-around;
+	// justify-items: flex-start;
 	flex-direction: row;
 	background-color: $background-color-secondary;
 	font-size: 1.3rem;
+	p {
+		width: 100%;
+		text-align: center;
+	}
 }
 .receiver {
 	color: rgb(29, 194, 29);

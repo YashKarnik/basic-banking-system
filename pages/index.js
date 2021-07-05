@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Navbar from '../components/Navbar';
 import styles from '../styles/home.module.scss';
 import { useState } from 'react';
 

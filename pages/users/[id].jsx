@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '../../styles/user.module.scss';
+import { baseUri } from '../../next.config';
 
+import Head from 'next/head';
 const User = ({ user, transactions }) => {
 	function get_date(datetime) {
 		let date = datetime.substring(0, 10);
@@ -20,33 +22,38 @@ const User = ({ user, transactions }) => {
 
 	return (
 		<div className={styles.container}>
+			<Head>
+				<title>
+					Account | {user.first_name}&nbsp;{user.last_name}
+				</title>
+			</Head>
 			<div className={styles.user}>
 				<div className={styles.name}>
 					{user.first_name}&nbsp;{user.last_name}
 				</div>
 				<div className={styles.email}>{user.email}</div>
 				<div className={styles.curr_balance}>
-					Current balance: {user.curr_balance}/-
+					Current balance: ${user.curr_balance}/-
 				</div>
 			</div>
 
 			<div className={styles.transactions}>
 				<div className={`${styles.transaction} ${styles.receiver}`}>
-					<p>From: Central Bank</p>
+					<p>From: Bank</p>
 					<p>
 						To: {user.first_name} {user.last_name}
 					</p>
 					<p>Thu, Jul 1, 2021</p>
-					<p>VALUE: 100000</p>
+					<p>VALUE: $100000/-</p>
 				</div>
-				{transactions?.map(transaction => (
+				{transactions?.map((transaction, i) => (
 					<div
 						className={`${styles.transaction} ${
 							user.user_id !== transaction.senderID
 								? styles.receiver
 								: styles.sender
 						}`}
-						key={transaction.transactionID}>
+						key={i}>
 						<p>
 							From: {transaction.senderfirstName} {transaction.senderlastName}
 						</p>
@@ -55,8 +62,8 @@ const User = ({ user, transactions }) => {
 						</p>
 						<p>{get_date(transaction.time)}</p>
 						<p>
-							VALUE: {user.user_id == transaction.senderID ? '-' : '+'}
-							{transaction.value}
+							VALUE: {user.user_id == transaction.senderID ? '-' : '+'}$
+							{transaction.value}/-
 						</p>
 					</div>
 				))}
@@ -72,25 +79,22 @@ export default User;
 export async function getServerSideProps(context) {
 	const { id } = context.query;
 	try {
-		const res = await fetch(`http://localhost:3001/api/users/${id}`);
+		const res = await fetch(`${baseUri}/api/users/${id}`);
+		const transactions = await fetch(`${baseUri}/api/transactions/${id}`);
+
 		const json = await res.json();
-		const transactions = await fetch(
-			`http://localhost:3001/api/transactions/${id}`
-		);
-		if (transactions) {
-			const transactionsJson = await transactions.json();
-			return {
-				props: {
-					user: json?.results[0],
-					transactions: transactionsJson.recievers,
-				},
-			};
-		} else console.log(transactions);
-	} catch (error) {
+		const transactionsJson = await transactions.json();
+		if (json?.error || transactionsJson?.error)
+			throw json?.error || transactionsJson?.error;
 		return {
 			props: {
-				error: 'err',
+				user: json?.results[0],
+				transactions: transactionsJson.recievers,
 			},
+		};
+	} catch (error) {
+		return {
+			notFound: true,
 		};
 	}
 }

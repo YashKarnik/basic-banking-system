@@ -11,8 +11,8 @@
 
 .heading {
 	padding: 0.5rem;
-	font-size: 3rem;
-	font-weight: lighter;
+	font-size: 4rem;
+	// font-weight: lighter;
 }
 
 .users_list {
@@ -25,9 +25,9 @@
 	.user {
 		color: $font-color-primary;
 		cursor: pointer;
-		width: 70%;
+		width: 90%;
 		margin: auto;
-		padding: 0.5rem 2rem;
+		padding: 1rem 2rem;
 		border-radius: 0.4rem;
 		display: flex;
 		align-items: center;
