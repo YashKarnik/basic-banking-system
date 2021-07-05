@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from '../../styles/user.module.scss';
-import { baseUri } from '../../next.config';
 
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 const User = ({ user, transactions }) => {
 	function get_date(datetime) {
 		let date = datetime.substring(0, 10);
@@ -78,10 +78,12 @@ export default User;
 
 export async function getServerSideProps(context) {
 	const { id } = context.query;
-	const host = context.req.headers.host;
-
+	// const router = useRouter();
+	// const { basePath } = router;
+	const basePath = process.env.BASE_API_URI;
+	console.log(basePath);
 	try {
-		const res = await fetch(`${baseUri}${host}/api/users/${id}`);
+		const res = await fetch(`${basePath}/api/users/${id}`);
 		const transactions = await fetch(
 			`${baseUri}${host}/api/transactions/${id}`
 		);

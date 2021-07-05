@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/transfer.module.scss';
-import { baseUri } from '../../next.config';
 import Head from 'next/head';
+// import { useRouter } from 'next/router';
 const Transfer = ({ user, rest }) => {
 	const [receiverID, setReceiverID] = useState('');
 	const [value, setValue] = useState('');
@@ -108,10 +108,12 @@ const Transfer = ({ user, rest }) => {
 export default Transfer;
 export async function getServerSideProps(context) {
 	const { senderID } = context.query;
-	const host = context.req.headers.host;
+	// const router = useRouter();
+	// const { basePath } = router;
+	const basePath = process.env.BASE_API_URI;
 
 	try {
-		const res = await fetch(`${baseUri}${host}/api/users`);
+		const res = await fetch(`${basePath}/api/users`);
 		const json = await res.json();
 		if (json?.error) throw json.error;
 		const user = json.results.filter(element => element.user_id == senderID)[0];

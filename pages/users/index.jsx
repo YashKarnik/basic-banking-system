@@ -3,29 +3,9 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import styles from '../../styles/users.module.scss';
 import Loading from '../../components/loading';
-import { baseUri } from '../../next.config';
-// import Head from 'next/head';
 export default function Home({ users }) {
 	const [loading, setLoading] = useState(true);
-	const Router = useRouter();
-	useEffect(() => {
-		const start = () => {
-			console.log('start');
-			setLoading(true);
-		};
-		const end = () => {
-			console.log('findished');
-			setLoading(false);
-		};
-		Router.events.on('routeChangeStart', start);
-		Router.events.on('routeChangeComplete', end);
-		Router.events.on('routeChangeError', end);
-		return () => {
-			Router.events.off('routeChangeStart', start);
-			Router.events.off('routeChangeComplete', end);
-			Router.events.off('routeChangeError', end);
-		};
-	}, [Router]);
+
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -49,10 +29,12 @@ export default function Home({ users }) {
 }
 export async function getServerSideProps(context) {
 	const host = context.req.headers.host;
-	console.log(`${baseUri}${host}/api/users`);
-	console.log({ baseUri, host });
+	// const router = useRouter();
+	// const { basePath } = router;
+	const basePath = process.env.BASE_API_URI;
+	console.log(basePath);
 	try {
-		const res = await fetch(`${baseUri}${host}/api/users`);
+		const res = await fetch(`${basePath}/api/users`);
 		const json = await res.json();
 		if (json?.error) throw json.error;
 		return {
