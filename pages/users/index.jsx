@@ -48,8 +48,9 @@ export default function Home({ users }) {
 	);
 }
 export async function getServerSideProps(context) {
+	const host = context.req.headers.host;
 	try {
-		const res = await fetch(`${baseUri}/api/users`);
+		const res = await fetch(`${baseUri}${host}/api/users`);
 		const json = await res.json();
 		if (json?.error) throw json.error;
 		return {

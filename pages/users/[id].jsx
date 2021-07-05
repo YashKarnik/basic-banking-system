@@ -78,9 +78,13 @@ export default User;
 
 export async function getServerSideProps(context) {
 	const { id } = context.query;
+	const host = context.req.headers.host;
+
 	try {
-		const res = await fetch(`${baseUri}/api/users/${id}`);
-		const transactions = await fetch(`${baseUri}/api/transactions/${id}`);
+		const res = await fetch(`${baseUri}${host}/api/users/${id}`);
+		const transactions = await fetch(
+			`${baseUri}${host}/api/transactions/${id}`
+		);
 
 		const json = await res.json();
 		const transactionsJson = await transactions.json();
