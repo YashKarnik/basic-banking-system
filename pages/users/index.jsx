@@ -49,6 +49,8 @@ export default function Home({ users }) {
 }
 export async function getServerSideProps(context) {
 	const host = context.req.headers.host;
+	console.log(`${baseUri}${host}/api/users`);
+	console.log({ baseUri, host });
 	try {
 		const res = await fetch(`${baseUri}${host}/api/users`);
 		const json = await res.json();
