@@ -1,0 +1,42 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [static-site]
+  pull_request:
+    branches: [static-site]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Installing my packages
+        run: npm ci
+      - name: Set Actions Allow Unsecure Commands
+        run: |
+          echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
+      - name: Build my App
+        env:
+          AWS_RDS_DB_HOST: ${{ secrets.AWS_RDS_DB_HOST }}
+          AWS_RDS_DB_USER: ${{ secrets.AWS_RDS_DB_USER }}
+          AWS_RDS_DB_PASSWORD: ${{ secrets.AWS_RDS_DB_PASSWORD }}
+          AWS_RDS_DB_DEFAULT_DATABASE: ${{ secrets.AWS_RDS_DB_DEFAULT_DATABASE }}
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+        run: npm run build && npm run export
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.5.9
+        with:
+          BRANCH: gh-pages
+          FOLDER: out

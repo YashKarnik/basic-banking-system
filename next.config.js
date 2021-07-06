@@ -1,9 +1,6 @@
-const BASE_API_URI =
-	process.env.NODE_ENV == 'development'
-		? 'http://localhost:3001'
-		: 'https://banking-system-pi.vercel.app/';
+const path =
+	process.env.NODE_ENV == 'git-production' ? '/basic-banking-system' : '';
 module.exports = {
-	env: {
-		BASE_API_URI: BASE_API_URI,
-	},
+	basePath: path,
+	assetPrefix: path,
 };

@@ -1,11 +1,13 @@
 {
 	"name": "basic-banking-system-sparks_foundation",
 	"version": "0.1.0",
+	"homepage": "https://YashKarnik.github.io/basic-banking-system",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
 		"export": "next export",
+		"genSS": "next build && next export",
 		"start": "next start"
 	},
 	"dependencies": {

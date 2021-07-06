@@ -23,9 +23,8 @@ export default function Home({ users }) {
 		</div>
 	);
 }
-export async function getServerSideProps(context) {
-	const host = context.req.headers.host;
 
+export async function getStaticProps(context) {
 	console.log('All users', server, process.env.NODE_ENV);
 	try {
 		const res = await fetch(`${server}/api/users`);

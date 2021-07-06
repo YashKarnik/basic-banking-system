@@ -72,15 +72,12 @@ const User = ({ user, transactions }) => {
 		</div>
 	);
 };
-export default User;
 
-export async function getServerSideProps(context) {
-	const { id } = context.query;
-	console.log('users with ID', id, server, process.env.NODE_ENV);
+export async function getStaticProps({ params }) {
+	const { id } = params;
 	try {
 		const res = await fetch(`${server}/api/users/${id}`);
 		const transactions = await fetch(`${server}/api/transactions/${id}`);
-
 		const json = await res.json();
 		const transactionsJson = await transactions.json();
 		if (json?.error || transactionsJson?.error)
@@ -90,6 +87,7 @@ export async function getServerSideProps(context) {
 				user: json?.results[0],
 				transactions: transactionsJson.recievers,
 			},
+			revalidate: 10,
 		};
 	} catch (error) {
 		console.log(error);
@@ -98,3 +96,15 @@ export async function getServerSideProps(context) {
 		};
 	}
 }
+
+export async function getStaticPaths() {
+	let paths = [];
+	for (let i = 1; i < 21; i++) paths.push({ params: { id: `${i}` } });
+	// console.log(paths);
+	return {
+		paths,
+		fallback: false, // See the "fallback" section below
+	};
+}
+
+export default User;

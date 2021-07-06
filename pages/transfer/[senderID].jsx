@@ -105,17 +105,18 @@ const Transfer = ({ user, rest }) => {
 	);
 };
 
-export default Transfer;
-export async function getServerSideProps(context) {
-	const { senderID } = context.query;
-
+export async function getStaticProps({ params }) {
+	const { senderID } = params;
 	console.log('Transfers', server, process.env.NODE_ENV);
 	try {
+		console.log({ senderID });
 		const res = await fetch(`${server}/api/users`);
 		const json = await res.json();
 		if (json?.error) throw json.error;
+		console.log(json.results);
 		const user = json.results.filter(element => element.user_id == senderID)[0];
 		const rest = json.results.filter(element => element.user_id != senderID);
+		console.log({ user, senderID });
 
 		return {
 			props: {
@@ -129,3 +130,13 @@ export async function getServerSideProps(context) {
 		};
 	}
 }
+export async function getStaticPaths() {
+	let paths = [];
+	for (let i = 1; i < 21; i++) paths.push({ params: { senderID: `${i}` } });
+	return {
+		paths,
+		fallback: false,
+	};
+}
+
+export default Transfer;
