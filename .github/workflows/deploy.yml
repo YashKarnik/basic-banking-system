@@ -32,7 +32,6 @@ jobs:
           AWS_RDS_DB_USER: ${{ secrets.AWS_RDS_DB_USER }}
           AWS_RDS_DB_PASSWORD: ${{ secrets.AWS_RDS_DB_PASSWORD }}
           AWS_RDS_DB_DEFAULT_DATABASE: ${{ secrets.AWS_RDS_DB_DEFAULT_DATABASE }}
-          NODE_ENV: ${{ secrets.NODE_ENV }}
         run: npm run build && npm run export
 
       - name: Deploy 🚀
