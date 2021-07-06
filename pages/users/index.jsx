@@ -1,11 +1,7 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
 import styles from '../../styles/users.module.scss';
-import Loading from '../../components/loading';
+import { server } from '../../config';
 export default function Home({ users }) {
-	const [loading, setLoading] = useState(true);
-
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -29,12 +25,10 @@ export default function Home({ users }) {
 }
 export async function getServerSideProps(context) {
 	const host = context.req.headers.host;
-	// const router = useRouter();
-	// const { basePath } = router;
-	const basePath = process.env.BASE_API_URI;
-	console.log(basePath);
+
+	console.log('All users', server, process.env.NODE_ENV);
 	try {
-		const res = await fetch(`${basePath}/api/users`);
+		const res = await fetch(`${server}/api/users`);
 		const json = await res.json();
 		if (json?.error) throw json.error;
 		return {

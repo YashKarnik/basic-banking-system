@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/transfer.module.scss';
 import Head from 'next/head';
-// import { useRouter } from 'next/router';
+import { server } from '../../config';
 const Transfer = ({ user, rest }) => {
 	const [receiverID, setReceiverID] = useState('');
 	const [value, setValue] = useState('');
@@ -32,7 +32,7 @@ const Transfer = ({ user, rest }) => {
 				value,
 			}),
 		};
-		const res = await fetch(`${baseUri}/api/transfer/${user.user_id}`, options);
+		const res = await fetch(`${server}/api/transfer/${user?.user_id}`, options);
 		const json = await res.json();
 		console.log(json, res);
 		if (res.ok) {
@@ -108,12 +108,10 @@ const Transfer = ({ user, rest }) => {
 export default Transfer;
 export async function getServerSideProps(context) {
 	const { senderID } = context.query;
-	// const router = useRouter();
-	// const { basePath } = router;
-	const basePath = process.env.BASE_API_URI;
 
+	console.log('Transfers', server, process.env.NODE_ENV);
 	try {
-		const res = await fetch(`${basePath}/api/users`);
+		const res = await fetch(`${server}/api/users`);
 		const json = await res.json();
 		if (json?.error) throw json.error;
 		const user = json.results.filter(element => element.user_id == senderID)[0];

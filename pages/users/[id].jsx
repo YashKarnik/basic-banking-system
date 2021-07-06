@@ -1,8 +1,6 @@
-import React from 'react';
 import styles from '../../styles/user.module.scss';
-
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { server } from '../../config';
 const User = ({ user, transactions }) => {
 	function get_date(datetime) {
 		let date = datetime.substring(0, 10);
@@ -78,15 +76,10 @@ export default User;
 
 export async function getServerSideProps(context) {
 	const { id } = context.query;
-	// const router = useRouter();
-	// const { basePath } = router;
-	const basePath = process.env.BASE_API_URI;
-	console.log(basePath);
+	console.log('users with ID', id, server, process.env.NODE_ENV);
 	try {
-		const res = await fetch(`${basePath}/api/users/${id}`);
-		const transactions = await fetch(
-			`${baseUri}${host}/api/transactions/${id}`
-		);
+		const res = await fetch(`${server}/api/users/${id}`);
+		const transactions = await fetch(`${server}/api/transactions/${id}`);
 
 		const json = await res.json();
 		const transactionsJson = await transactions.json();
@@ -99,7 +92,7 @@ export async function getServerSideProps(context) {
 			},
 		};
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 		return {
 			notFound: true,
 		};
