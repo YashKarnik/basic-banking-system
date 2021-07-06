@@ -90,7 +90,6 @@ export async function getStaticProps({ params }) {
 			revalidate: 10,
 		};
 	} catch (error) {
-		console.log(error);
 		return {
 			notFound: true,
 		};
