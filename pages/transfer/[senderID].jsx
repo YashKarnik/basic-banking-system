@@ -7,6 +7,7 @@ const Transfer = ({ user, rest }) => {
 	const [value, setValue] = useState('');
 	const [currID, setCurrID] = useState(rest[0].user_id);
 	const [success, setSuccess] = useState(0);
+	const [loading, setLoading] = useState(false);
 	async function handleSumbit(evt) {
 		evt.preventDefault();
 		if (currID == '') {
@@ -21,6 +22,7 @@ const Transfer = ({ user, rest }) => {
 			alert('Insufficient balance');
 			return;
 		}
+		setLoading(true);
 		const options = {
 			headers: {
 				Accept: 'application/json',
@@ -40,6 +42,7 @@ const Transfer = ({ user, rest }) => {
 			setValue('');
 			setSuccess(1);
 		} else setSuccess(2);
+		setLoading(false);
 	}
 
 	return (
@@ -81,7 +84,7 @@ const Transfer = ({ user, rest }) => {
 						min='10'
 					/>
 					<button className={styles.payMoney} type='submit'>
-						TRANSFER
+						{loading ? 'LOADING...' : 'TRANSFER'}
 					</button>
 				</form>
 				{(function (flag) {

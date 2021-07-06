@@ -66,9 +66,9 @@ const User = ({ user, transactions }) => {
 					</div>
 				))}
 			</div>
-			<button className={styles.payMoney}>
-				<a href={`/transfer/${user?.user_id}`}>SEND MONEY</a>
-			</button>
+			<a href={`/transfer/${user?.user_id}`} className={styles.payMoney}>
+				<button>SEND MONEY</button>
+			</a>
 		</div>
 	);
 };

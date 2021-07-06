@@ -50,15 +50,18 @@
 }
 
 .payMoney {
-	border: none;
-	outline: none;
-	font-size: 1.3rem;
-	color: $font-color-primary;
-	padding: 1.3rem;
-	background-color: $action-success;
-	border-radius: 10000rem;
-	transition-duration: 100ms;
-	&:hover {
-		transform: scale(1.03);
+	button {
+		cursor: pointer;
+		border: none;
+		outline: none;
+		font-size: 1.3rem;
+		color: $font-color-primary;
+		padding: 1.3rem;
+		background-color: $action-success;
+		border-radius: 10000rem;
+		transition-duration: 100ms;
+		&:hover {
+			transform: scale(1.03);
+		}
 	}
 }
