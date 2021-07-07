@@ -1,4 +1,5 @@
 import getData from '../../../getData';
+import corsMiddelware from '../../../config/cors';
 
 async function helper(e) {
 	try {
@@ -24,6 +25,7 @@ async function helper(e) {
 }
 
 export default async (req, res) => {
+	await corsMiddelware(req, res);
 	const { user_id } = req.query;
 	try {
 		const query = `SELECT * FROM transfers WHERE senderID='${user_id}' 

@@ -1,7 +1,9 @@
 import getData from '../../../getData';
+import corsMiddelware from '../../../config/cors';
 
 // POST
 export default async (req, res) => {
+	await corsMiddelware(req, res);
 	const { senderID } = req.query;
 	const { receiverID, value } = req.body;
 	try {

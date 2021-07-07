@@ -1,9 +1,10 @@
 import getData from '../../../getData';
+import corsMiddelware from '../../../config/cors';
 
 export default async (req, res) => {
-	const { id } = req.query;
-
+	await corsMiddelware(req, res);
 	try {
+		const { id } = req.query;
 		const results = await getData(`SELECT * from users WHERE user_id='${id}'`);
 		res.status(200).json({ results });
 	} catch (error) {
