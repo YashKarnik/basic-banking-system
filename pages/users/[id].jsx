@@ -1,5 +1,6 @@
 import styles from '../../styles/user.module.scss';
 import Head from 'next/head';
+import Link from 'next/link';
 import { server } from '../../config';
 const User = ({ user, transactions }) => {
 	function get_date(datetime) {
@@ -66,9 +67,11 @@ const User = ({ user, transactions }) => {
 					</div>
 				))}
 			</div>
-			<a href={`/transfer/${user?.user_id}`} className={styles.payMoney}>
-				<button>SEND MONEY</button>
-			</a>
+			<Link href={`/transfer/${user?.user_id}`}>
+				<a className={styles.payMoney}>
+					<button>SEND MONEY</button>
+				</a>
+			</Link>
 		</div>
 	);
 };

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../../styles/users.module.scss';
 import { server } from '../../config';
+import Link from 'next/link';
 export default function Home({ users }) {
 	return (
 		<div className={styles.container}>
@@ -10,22 +11,22 @@ export default function Home({ users }) {
 			<div className={styles.heading}>Accounts</div>
 			<div className={styles.users_list}>
 				{users?.map((user, idx) => (
-					<a key={idx} href={`users/${user.user_id}`}>
-						<div className={styles.user}>
-							<p className={styles.name}>
-								{user?.first_name}&nbsp;
-								{user?.last_name}
-							</p>
-						</div>
-					</a>
+					<Link key={idx} href={`/users/${user.user_id}`}>
+						<a>
+							<div className={styles.user}>
+								<p className={styles.name}>
+									{user?.first_name}&nbsp;
+									{user?.last_name}
+								</p>
+							</div>
+						</a>
+					</Link>
 				))}
 			</div>
 		</div>
 	);
 }
-export async function getServerSideProps(context) {
-	const host = context.req.headers.host;
-
+export async function getStaticProps(context) {
 	console.log('All users', server, process.env.NODE_ENV);
 	try {
 		const res = await fetch(`${server}/api/users`);
