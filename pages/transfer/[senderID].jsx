@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/transfer.module.scss';
-import Head from 'next/head';
 import { server } from '../../config';
+import Head from 'next/head';
+import Loading from '../../components/loading';
 const Transfer = ({ user, rest }) => {
 	const [receiverID, setReceiverID] = useState('');
 	const [value, setValue] = useState('');
 	const [currID, setCurrID] = useState(rest[0].user_id);
+	const [currentBalance, setCurrentBalance] = useState(user.curr_balance);
 	const [success, setSuccess] = useState(0);
 	const [loading, setLoading] = useState(false);
 	async function handleSumbit(evt) {
@@ -36,12 +38,15 @@ const Transfer = ({ user, rest }) => {
 		};
 		const res = await fetch(`${server}/api/transfer/${user?.user_id}`, options);
 		const json = await res.json();
-		console.log(json, res);
+		console.log(json.balance.curr_balance, res);
 		if (res.ok) {
 			setReceiverID('');
 			setValue('');
 			setSuccess(1);
-		} else setSuccess(2);
+			setCurrentBalance(json.balance.curr_balance);
+		} else {
+			setSuccess(2);
+		}
 		setLoading(false);
 	}
 
@@ -57,9 +62,7 @@ const Transfer = ({ user, rest }) => {
 					{user.first_name}&nbsp;{user.last_name}
 				</div>
 				<div className={styles.email}>{user.email}</div>
-				<div className={styles.curr_balance}>
-					Balance: ${user.curr_balance}/-
-				</div>
+				<div className={styles.curr_balance}>Balance: ${currentBalance}/-</div>
 			</div>
 			<div className={styles.users_list}>
 				{rest?.map(user => (
@@ -75,18 +78,22 @@ const Transfer = ({ user, rest }) => {
 						</p>
 					</div>
 				))}
-				<form className={styles.payform} onSubmit={handleSumbit}>
-					<input
-						type='number'
-						onChange={e => setValue(e.target.value)}
-						placeholder='Enter money to transfer'
-						value={value}
-						min='10'
-					/>
-					<button className={styles.payMoney} type='submit'>
-						{loading ? 'LOADING...' : 'TRANSFER'}
-					</button>
-				</form>
+				{!loading ? (
+					<form className={styles.payform} onSubmit={handleSumbit}>
+						<input
+							type='number'
+							onChange={e => setValue(e.target.value)}
+							placeholder='Enter money to transfer'
+							value={value}
+							min='10'
+						/>
+						<button className={styles.payMoney} type='submit'>
+							{loading ? 'LOADING...' : 'TRANSFER'}
+						</button>
+					</form>
+				) : (
+					<Loading isFull={false} />
+				)}
 				{(function (flag) {
 					if (flag == 1)
 						return (
