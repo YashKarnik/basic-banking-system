@@ -4,7 +4,7 @@ import Cors from 'cors';
 
 const whitelist = [
 	new RegExp('http://localhost:*'),
-	new RegExp('https://banking-system-*.vercel.app/'),
+	new RegExp('https://banking-system-*.vercel.app/*'),
 ];
 const corsOptions = {
 	origin: whitelist,
