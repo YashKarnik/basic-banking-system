@@ -1,22 +1,43 @@
-.container {
+.full {
 	height: 100vh;
-	width: 100%;
-	display: grid;
-	place-items: center;
+	// background-color: blue;
 	div {
-		animation: rot 1000ms linear 0s infinite normal forwards;
-		border: 5px solid transparent;
-		border-top: 5px solid #fff;
-		border-radius: 50%;
 		width: 5rem;
 		height: 5rem;
 	}
 }
+.component {
+	// background-color: red;
+	height: 100%;
+	div {
+		width: 3rem;
+		height: 3rem;
+	}
+}
+.container {
+	width: 100%;
+	display: grid;
+	// justify-content: center;
+	// justify-items: center;
+	// align-content: center;
+	// align-self: center;
+	place-items: center;
+	// background-color: red;
+	div {
+		// background-color: green;
+		animation: rot 600ms linear 0s infinite normal forwards;
+		border: 5px solid transparent;
+		border-top: 5px solid #fff;
+		border-radius: 50%;
+		// width: 5rem;
+		// height: 5rem;
+	}
+}
 @keyframes rot {
 	from {
-		transform: translate(-50%, -50%) rotate(0deg);
+		transform: rotate(0deg);
 	}
 	to {
-		transform: translate(-50%, -50%) rotate(360deg);
+		transform: rotate(360deg);
 	}
 }

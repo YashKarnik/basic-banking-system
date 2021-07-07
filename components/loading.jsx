@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from '../styles/loading.module.scss';
 
-const Loading = () => {
+const Loading = ({ isFull }) => {
 	return (
-		<div className={styles.container}>
+		<div
+			className={`${styles.container} ${
+				isFull ? styles.full : styles.component
+			}`}>
 			<div></div>
 		</div>
 	);
