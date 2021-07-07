@@ -11,7 +11,7 @@ const corsOptions = {
 	methods: ['GET', 'POST'],
 };
 
-const cors = Cors(corsOptions);
+const cors = Cors();
 
 function runCorsMiddleware(req, res) {
 	return new Promise((resolve, reject) => {
