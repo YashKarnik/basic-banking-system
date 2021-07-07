@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../../styles/transfer.module.scss';
 import { server } from '../../config';
 import Head from 'next/head';
+import Link from 'next/link';
 import Loading from '../../components/loading';
 const Transfer = ({ user, rest }) => {
 	const [receiverID, setReceiverID] = useState('');
@@ -57,13 +58,17 @@ const Transfer = ({ user, rest }) => {
 					Transfer | {user.first_name}&nbsp;{user.last_name}
 				</title>
 			</Head>
-			<div className={styles.user}>
-				<div className={styles.name}>
-					{user.first_name}&nbsp;{user.last_name}
+			<Link href={`/users/${user.user_id}`}>
+				<div className={`${styles.user} ${styles.user_focus}`}>
+					<div className={styles.name}>
+						{user.first_name}&nbsp;{user.last_name}
+					</div>
+					<div className={styles.email}>{user.email}</div>
+					<div className={styles.curr_balance}>
+						Balance: ${currentBalance}/-
+					</div>
 				</div>
-				<div className={styles.email}>{user.email}</div>
-				<div className={styles.curr_balance}>Balance: ${currentBalance}/-</div>
-			</div>
+			</Link>
 			<div className={styles.users_list}>
 				{rest?.map(user => (
 					<div
