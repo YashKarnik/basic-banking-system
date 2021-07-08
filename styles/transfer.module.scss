@@ -7,13 +7,14 @@
 	text-align: center;
 	border-radius: 1rem;
 	background-color: $background-color-tertiary;
+}
 
+.user {
+	// background-color: red;
 	.name {
 		font-size: 4rem;
 	}
-	.email {
-		font-size: 2rem;
-	}
+	.email,
 	.curr_balance {
 		font-size: 2rem;
 	}
@@ -21,7 +22,6 @@
 
 .user_focus {
 	cursor: pointer;
-	// background-color: red;
 	transition-duration: 100ms;
 	&:hover {
 		background-color: $background-color-secondary;
@@ -53,14 +53,13 @@
 .payform {
 	display: flex;
 	flex-direction: row;
-	justify-content: centers;
+	justify-content: center;
 	margin: 1rem auto 0 auto;
 	gap: 1rem;
 	input {
 		outline: none;
 		padding: 1rem;
 		text-align: center;
-
 		font-size: 1.3rem;
 		border-radius: 10000rem;
 		&::placeholder {
@@ -149,5 +148,77 @@
 	}
 	100% {
 		transform: scale(1.03);
+	}
+}
+
+@media only screen and (max-width: 955px) {
+	.transfer_success,
+	.transfer_fail {
+		font-size: 1.5rem;
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 740px) {
+	.transfer_success,
+	.transfer_fail {
+		font-size: 1rem;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.user_focus {
+		.name {
+			font-size: 3rem;
+		}
+		.email,
+		.curr_balance {
+			font-size: 2rem;
+		}
+	}
+}
+@media only screen and (max-width: 500px) {
+	.user_focus {
+		.name {
+			font-size: 2.3rem;
+		}
+		.email,
+		.curr_balance {
+			font-size: 1.3rem;
+		}
+	}
+	.payform {
+		width: 100%;
+		flex-direction: column;
+		justify-content: center;
+		justify-items: stretch;
+
+		input,
+		.payMoney {
+			padding: 0.4rem;
+			font-size: 1.2rem;
+			width: 90%;
+			margin: auto;
+			&::placeholder {
+				font-size: 1rem;
+			}
+		}
+	}
+	.users_list {
+		.user {
+			padding: 0.2;
+			.name {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				font-size: 2rem;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	.transfer_success,
+	.transfer_fail {
+		font-size: 0.8rem;
 	}
 }

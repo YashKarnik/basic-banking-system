@@ -38,12 +38,16 @@ const User = ({ user, transactions }) => {
 
 			<div className={styles.transactions}>
 				<div className={`${styles.transaction} ${styles.receiver}`}>
-					<p>From: Bank</p>
 					<p>
-						To: {user.first_name} {user.last_name}
+						<span>From:</span> Central Bank
+					</p>
+					<p>
+						<span>To:</span> {user.first_name} {user.last_name}
 					</p>
 					<p>Thu, Jul 1, 2021</p>
-					<p>VALUE: $100000/-</p>
+					<p>
+						<span>Value</span> $100000/-
+					</p>
 				</div>
 				{transactions?.map((transaction, i) => (
 					<div
@@ -54,14 +58,17 @@ const User = ({ user, transactions }) => {
 						}`}
 						key={i}>
 						<p>
-							From: {transaction.senderfirstName} {transaction.senderlastName}
+							<span>From: </span>
+							{transaction.senderfirstName} {transaction.senderlastName}
 						</p>
 						<p>
-							To: {transaction.receiverfirstName} {transaction.receiverlastName}
+							<span>To:</span> {transaction.receiverfirstName}{' '}
+							{transaction.receiverlastName}
 						</p>
 						<p>{get_date(transaction.time)}</p>
 						<p>
-							VALUE: {user.user_id == transaction.senderID ? '-' : '+'}$
+							<span>VALUE:</span>{' '}
+							{user.user_id == transaction.senderID ? '-' : '+'}$
 							{transaction.value}/-
 						</p>
 					</div>
