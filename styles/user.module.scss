@@ -105,3 +105,18 @@
 		padding: 0.3rem;
 	}
 }
+
+.alluserlink {
+	position: absolute;
+	display: block;
+	text-align: left;
+	margin: 1rem;
+	padding: 0.5rem;
+	opacity: 0.6;
+	height: 4rem;
+	width: 4rem;
+	transition-duration: 100ms;
+	&:hover {
+		opacity: 0.9;
+	}
+}

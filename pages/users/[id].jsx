@@ -1,7 +1,9 @@
 import styles from '../../styles/user.module.scss';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { server } from '../../config';
+import allUsersImg from '../../public/group-xxl.png';
 const User = ({ user, transactions }) => {
 	function get_date(datetime) {
 		let date = datetime.substring(0, 10);
@@ -26,6 +28,13 @@ const User = ({ user, transactions }) => {
 					Account | {user.first_name}&nbsp;{user.last_name}
 				</title>
 			</Head>
+			<Link href={`/users`}>
+				<a className={styles.alluserlink}>
+					<div>
+						<Image src={allUsersImg} layout='responsive' alt='All users' />
+					</div>
+				</a>
+			</Link>
 			<div className={styles.user}>
 				<div className={styles.name}>
 					{user.first_name}&nbsp;{user.last_name}

@@ -3,6 +3,9 @@ import styles from '../../styles/transfer.module.scss';
 import { server } from '../../config';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
+import allUsersImg from '../../public/group-xxl.png';
+
 import Loading from '../../components/loading';
 const Transfer = ({ user, rest }) => {
 	const [receiverID, setReceiverID] = useState('');
@@ -58,6 +61,13 @@ const Transfer = ({ user, rest }) => {
 					Transfer | {user.first_name}&nbsp;{user.last_name}
 				</title>
 			</Head>
+			<Link href={`/users`}>
+				<a className={styles.alluserlink}>
+					<div>
+						<Image src={allUsersImg} layout='responsive' alt='All users' />
+					</div>
+				</a>
+			</Link>
 			<Link href={`/users/${user.user_id}`}>
 				<div className={`${styles.user} ${styles.user_focus}`}>
 					<div className={styles.name}>
