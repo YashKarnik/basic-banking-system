@@ -8,7 +8,9 @@
 }
 
 .content {
+	// background-color: red;
 	text-align: center;
+	cursor: pointer;
 	// animation-name: pulse;
 	// animation-duration: 1000ms;
 	// animation-timing-function: linear;
@@ -17,18 +19,18 @@
 	// animation-direction: normal;
 	// animation-fill-mode: forwards;
 	// animation-play-state: running;
+	&:hover {
+		div {
+			transform: translate(2rem);
+		}
+	}
 	div {
 		cursor: pointer;
 		transition-duration: 100ms;
 		font-size: $font-size-secondary + 1rem;
-
-		&:hover {
-			transform: translate(2rem);
-		}
-
-		// &:active {
-		//
-		// }
+	}
+	p {
+		font-size: 7rem;
 	}
 }
 
