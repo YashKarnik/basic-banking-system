@@ -64,6 +64,20 @@
 		}
 	}
 }
+.alluserlink {
+	position: absolute;
+	display: block;
+	text-align: left;
+	margin: 1rem;
+	padding: 0.5rem;
+	opacity: 0.6;
+	height: 4rem;
+	width: 4rem;
+	transition-duration: 100ms;
+	&:hover {
+		opacity: 0.9;
+	}
+}
 @media only screen and (max-width: 600px) {
 	.container {
 		width: 100%;
@@ -88,6 +102,10 @@
 			flex-direction: column;
 		}
 	}
+	.alluserlink {
+		height: 3rem;
+		width: 3rem;
+	}
 }
 
 @media only screen and (max-width: 300px) {
@@ -104,19 +122,8 @@
 		font-size: 0.8rem;
 		padding: 0.3rem;
 	}
-}
-
-.alluserlink {
-	position: absolute;
-	display: block;
-	text-align: left;
-	margin: 1rem;
-	padding: 0.5rem;
-	opacity: 0.6;
-	height: 4rem;
-	width: 4rem;
-	transition-duration: 100ms;
-	&:hover {
-		opacity: 0.9;
+	.alluserlink {
+		height: 2.4rem;
+		width: 2.4rem;
 	}
 }
