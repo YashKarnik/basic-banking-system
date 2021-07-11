@@ -13,14 +13,14 @@ export default function Home() {
 				<link rel='icon' href='/money-bag.png' />
 			</Head>
 
-			<div className={styles.content}>
-				<h1>Basic Banking system</h1>
-				<div onClick={() => setRedirect(true)}>
-					<Link href='/users'>
+			<Link href='/users'>
+				<div className={styles.content}>
+					<p>Basic Banking system</p>
+					<div>
 						<a> &#12297;&#12297;&#12297;</a>
-					</Link>
+					</div>
 				</div>
-			</div>
+			</Link>
 		</div>
 	);
 }
